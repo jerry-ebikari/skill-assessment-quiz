@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "skill-assessment-quiz": {
+      "hosting": {
+        "skill-assessment-quiz": [
+          "skill-assessment-quiz"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "skill-assessment-quiz"
+  }
+}
