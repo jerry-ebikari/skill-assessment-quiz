@@ -1,0 +1,13 @@
+<header class="flex justify-between header">
+    <img class="clickable" routerLink="/" src="assets/images/logo.svg" alt="">
+    <div class="flex align-center links">
+        <!-- <p class="clickable link" *ngFor="let link of navlinks">
+            {{link.title}}
+        </p> -->
+        <div class="flex buttons">
+            <!-- <button class="btn primary-btn-hollow">Login</button> -->
+            <button routerLink="/login" class="ui yellow basic button btn">Login</button>
+            <button routerLink="/register" class="ui primary basic button btn">Sign up</button>
+        </div>
+    </div>
+</header>

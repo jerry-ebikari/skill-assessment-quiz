@@ -1,0 +1,23 @@
+.header {
+    height: 80px;
+    align-items: center;
+    // border: 1px solid black;
+    .links {
+        column-gap: 20px;
+    }
+    .link {
+        font-size: 20px;
+        margin: 0;
+    }
+    .buttons {
+        column-gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        .links {
+            display: none;
+        }
+    }
+}

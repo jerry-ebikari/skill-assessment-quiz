@@ -4,6 +4,77 @@
     src: url("./assets/worksans.ttf");
 }
 
+:root {
+    --primary-color:#FCC822;
+    --primary-color-dark: #e2b41e;
+    --primary-text-color: #545F7D;
+    --header-text-color: #213F7D;
+    --page-background: #E5E5E5;
+    --white: #FFFFFF;
+    --text-color: #333333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 *:not(i.icon) {
     font-family: WorkSans;
+}
+
+html, body {
+    height: 100%;
+    max-width: 100vw;
+}
+
+.btn {
+    cursor: pointer;
+    border-radius: 4px !important;
+    height: 48px;
+    font-weight: 600;
+    font-size: 14px !important;
+    padding: 0 16px;
+    border: none;
+}
+
+input {
+    &[type=text], &[type=email], &[type=password] {
+        height: 48px;
+    } 
+}
+
+.primary-btn {
+    background-color: var(--primary-color);
+    color: var(--white);
+    &:hover {
+        background-color: var(--primary-color-dark);
+    }
+}
+
+.primary-btn-hollow {
+    border: 1px solid var(--primary-color);
+    background-color: transparent;
+    color: var(--primary-color);
+}
+
+.flex {
+    display: flex;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.clickable {
+    cursor: pointer;
 }

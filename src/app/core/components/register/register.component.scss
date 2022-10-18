@@ -1,0 +1,25 @@
+.register-container {
+    padding-top: 60px;
+    .ui.form {
+        max-width: 450px;
+        .title {
+            margin-bottom: 40px;
+            color: var(--header-text-color);
+        }
+        label {
+            font-size: 16px;
+            color: var(--primary-text-color);
+        }
+        .password-container {
+            position: relative;
+            i.icon {
+                position: absolute;
+                font-size: 20px;
+                color: var(--primary-text-color);
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+    }
+}

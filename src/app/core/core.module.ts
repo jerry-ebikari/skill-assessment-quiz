@@ -4,6 +4,9 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { DemoComponent } from './components/demo/demo.component';
+import { HeaderComponent } from './components/header/header.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -12,10 +15,16 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
     SidebarComponent,
     LoginComponent,
     RegisterComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    DemoComponent,
+    HeaderComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
+  ],
+  exports: [
+    HeaderComponent
   ]
 })
 export class CoreModule { }

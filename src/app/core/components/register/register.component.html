@@ -1,1 +1,20 @@
-<p>register works!</p>
+<div class="register-container">
+    <form class="ui raised segment form" [formGroup]="form">
+        <h1 class="title">Register</h1>
+        <div class="field">
+            <label for="">Email</label>
+            <input type="text" placeholder="Enter Email Address" formControlName="email">
+        </div>
+        <div class="field">
+            <label for="">Password</label>
+            <div class="password-container">
+                <input [type]="isPasswordVisible ? 'text' : 'password'" placeholder="Enter Password" formControlName="password">
+                <i
+                    class="clickable eye slash icon"
+                    [class.slash]="!isPasswordVisible"
+                    (click)="togglePasswordVisibility()"
+                ></i>
+            </div>
+        </div>
+    </form>
+</div>
