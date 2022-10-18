@@ -1,20 +1,63 @@
-<div class="register-container">
+<div class="flex justify-between align-center register-container">
     <form class="ui raised segment form" [formGroup]="form">
         <h1 class="title">Register</h1>
         <div class="field">
+            <label for="">Username</label>
+            <input type="text" placeholder="Enter Username" formControlName="username">
+        </div>
+        <div class="field">
             <label for="">Email</label>
-            <input type="text" placeholder="Enter Email Address" formControlName="email">
+            <input type="email" placeholder="Enter Email Address" formControlName="email">
         </div>
         <div class="field">
             <label for="">Password</label>
             <div class="password-container">
-                <input [type]="isPasswordVisible ? 'text' : 'password'" placeholder="Enter Password" formControlName="password">
+                <input
+                    [type]="passwordVisible ? 'text' : 'password'"
+                    placeholder="Enter Password"
+                    class="password"
+                    name="password"
+                    formControlName="password"
+                    #password>
                 <i
-                    class="clickable eye slash icon"
-                    [class.slash]="!isPasswordVisible"
-                    (click)="togglePasswordVisibility()"
+                    class="clickable eye icon"
+                    [ngClass]="{slash: passwordVisible}"
+                    (click)="togglePasswordVisibility(password)"
                 ></i>
             </div>
         </div>
+        <div class="field">
+            <label for="">Confirm Password</label>
+            <div class="password-container">
+                <input
+                    [type]="confirmPasswordVisible ? 'text' : 'password'"
+                    placeholder="Re-enter Password"
+                    class="password"
+                    name="confirmPassword"
+                    formControlName="confirmPassword"
+                    #confirmPassword>
+                <i
+                    class="clickable eye icon"
+                    [ngClass]="{slash: confirmPasswordVisible}"
+                    (click)="togglePasswordVisibility(confirmPassword)"
+                ></i>
+            </div>
+        </div>
+        <button class="ui yellow button btn">Register</button>
+        <div class="flex justify-center align-center other-options">
+            <p>Or continue with</p>
+        </div>
+        <div class="flex socials">
+            <div class="ui clickable flex align-center justify-center segment google">
+                <i class="google icon"></i>
+                <span>Google</span>
+            </div>
+            <div class="ui clickable flex align-center justify-center segment facebook">
+                <i class="facebook icon"></i>
+                <span>Facebook</span>
+            </div>
+        </div>
     </form>
+
+    <img class="join-img" src="assets/images/landing-page-background.svg" alt="">
 </div>
