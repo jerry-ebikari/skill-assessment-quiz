@@ -27,6 +27,12 @@
                 padding-right: 50px;
             }
         }
+        .forgot-section {
+            p {
+                text-decoration: underline;
+                color: var(--primary-text-color);
+            }
+        }
         .btn {
             width: 100%;
             margin-top: 30px;

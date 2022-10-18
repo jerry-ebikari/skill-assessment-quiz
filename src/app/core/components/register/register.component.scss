@@ -13,6 +13,10 @@
             font-size: 16px;
             color: var(--primary-text-color);
         }
+        .error-message {
+            font-size: 14px;
+            color: var(--danger);
+        }
         .password-container {
             position: relative;
             i.icon {
