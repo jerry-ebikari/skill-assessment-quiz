@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DemoComponent } from './core/components/demo/demo.component';
-import { LandingPageComponent } from './core/components/landing-page/landing-page.component';
-import { LoginComponent } from './core/components/login/login.component';
-import { RegisterComponent } from './core/components/register/register.component';
+import { AuthGuard } from './core/guards/auth.guard';
+import { PublicGuard } from './core/guards/public.guard';
 
 const routes: Routes = [
-  {path: "", component: LandingPageComponent},
-  {path: "demo", component: DemoComponent},
-  {path: "login", component: LoginComponent},
-  {path: "register", component: RegisterComponent},
+  {
+    path: "",
+    loadChildren: () => import("./features/public/public.module").then(m => m.PublicModule),
+    canActivate: [PublicGuard]
+  },
+  
+  {
+    path: "user",
+    loadChildren: () => import("./features/user/user.module").then(m => m.UserModule),
+    canLoad: [AuthGuard]
+  }
 ];
 
 @NgModule({

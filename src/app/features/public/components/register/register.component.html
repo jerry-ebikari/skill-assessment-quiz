@@ -1,0 +1,160 @@
+<div class="flex justify-between align-center register-container">
+    <form class="ui raised segment form" [formGroup]="form" (ngSubmit)="register()">
+        <h1 class="title">Register</h1>
+        
+        <!-- USERNAME -->
+        <div
+            class="field"
+            [ngClass]="{error: form.get('username')!.touched && form.get('username')!.errors}"
+        >
+            <label for="">Username</label>
+            <div class="ui icon input">
+                <input
+                    type="text"
+                    placeholder="Enter Username"
+                    formControlName="username"
+                    (input)="usernameInput()"
+                >
+                <i class="check circle" [class.icon]="usernameAvailabilityChecked && !usernameExists"></i>
+            </div>
+
+            <ng-container *ngIf="form.get('username')!.valid">
+                <p class="error-message" *ngIf="usernameCheckFailed">
+                    Check failed, try again
+                </p>
+                <p class="error-message" *ngIf="!usernameCheckFailed && usernameAvailabilityChecked && usernameExists">
+                    Username already in use
+                </p>
+            </ng-container>
+
+            <small class="error-message" *ngIf="form.get('username')!.touched && form.get('username')!.errors">
+                <ng-container *ngIf="form.get('username')!.errors!['required']; else invalidUsername">
+                     Enter username
+                </ng-container>
+                <ng-template #invalidUsername>
+                     Enter a valid username
+                </ng-template>
+            </small>
+        </div>
+        <!-- CHECK USERNAME BUTTON -->
+        <div *ngIf="!usernameAvailabilityChecked || usernameExists else restOfForm">
+            <button
+                type="button"
+                class="ui yellow button btn"
+                [class.loading]="checkingUsernameAvailability"
+                [disabled]="form.get('username')!.invalid || checkingUsernameAvailability"
+                (click)="checkUsername()"
+            >
+                Check Availability
+            </button>
+            <p style="margin-top: 10px;" class="clickable login-link" routerLink="/login">Already have an account?</p>
+        </div>
+
+        <ng-template #restOfForm>
+            <!-- EMAIL -->
+            <div
+                class="field"
+                [ngClass]="{error: form.get('email')!.touched && form.get('email')!.errors}"
+            >
+                <label for="">Email</label>
+                <input type="email" placeholder="Enter Email Address" formControlName="email">
+                <small class="error-message" *ngIf="form.get('email')!.touched && form.get('email')!.errors">
+                    <ng-container *ngIf="form.get('email')!.errors!['required']; else invalidEmail">
+                         Enter email
+                    </ng-container>
+                    <ng-template #invalidEmail>
+                         Enter a valid email address
+                    </ng-template>
+                </small>
+            </div>
+    
+            <!-- PASSWORD -->
+            <div
+                class="field"
+                [ngClass]="{error: form.get('password')!.touched && form.get('password')!.errors}"
+            >
+                <label for="">Password</label>
+                <div class="password-container">
+                    <input
+                        [type]="passwordVisible ? 'text' : 'password'"
+                        placeholder="Enter Password"
+                        class="password"
+                        name="password"
+                        formControlName="password"
+                        #password>
+                    <i
+                        class="clickable eye icon"
+                        [ngClass]="{slash: passwordVisible}"
+                        (click)="togglePasswordVisibility(password)"
+                    ></i>
+                </div>
+                <small class="error-message" *ngIf="form.get('password')!.touched && form.get('password')!.errors">
+                    <ng-container *ngIf="form.get('password')!.errors!['required']; else invalidPassword">
+                         Enter password
+                    </ng-container>
+                    <ng-template #invalidPassword>
+                         Password must contain at least 6 characters
+                    </ng-template>
+                </small>
+            </div>
+    
+            <!-- CONFIRM PASSWORD -->
+            <div
+                class="field"
+                [ngClass]="{error: form.get('confirmPassword')!.touched && form.get('confirmPassword')!.errors}"
+            >
+                <label for="">Confirm Password</label>
+                <div class="password-container">
+                    <input
+                        [type]="confirmPasswordVisible ? 'text' : 'password'"
+                        placeholder="Re-enter Password"
+                        class="password"
+                        name="confirmPassword"
+                        formControlName="confirmPassword"
+                        [pattern]="password.value"
+                        #confirmPassword>
+                    <i
+                        class="clickable eye icon"
+                        [ngClass]="{slash: confirmPasswordVisible}"
+                        (click)="togglePasswordVisibility(confirmPassword)"
+                    ></i>
+                </div>
+                <small class="error-message" *ngIf="form.get('confirmPassword')!.touched && form.get('confirmPassword')!.errors">
+                    <ng-container *ngIf="form.get('confirmPassword')!.errors!['required']; else notSamePassword">
+                         Re-enter password
+                    </ng-container>
+                    <ng-template #notSamePassword>
+                         Password do not match
+                    </ng-template>
+                </small>
+            </div>
+            <p class="clickable login-link" routerLink="/login">Already have an account?</p>
+    
+            <!-- REGISTER BUTTON -->
+            <button type="submit" class="ui yellow button btn" [disabled]="form.invalid">Register</button>
+    
+        </ng-template>
+        <!-- OTHER REGISTRATION OPTIONS -->
+        <div class="flex justify-center align-center other-options">
+            <p>Or continue with</p>
+        </div>
+        <div class="flex socials">
+            <div
+                class="ui clickable flex align-center justify-center segment google"
+                (click)="loginWithGoogle()"
+            >
+                <i class="google icon"></i>
+                <span>Google</span>
+            </div>
+            <div
+                class="ui clickable flex align-center justify-center segment facebook"
+                (click)="loginWithFacebook()"
+            >
+                <i class="facebook icon"></i>
+                <span>Facebook</span>
+            </div>
+        </div>
+    </form>
+
+    <img class="join-img" src="assets/images/landing-page-background.svg" alt="">
+</div>

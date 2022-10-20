@@ -1,0 +1,107 @@
+.register-container {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    gap: 50px;
+    .ui.form {
+        width: clamp(200px, 90%, 450px);
+        padding: 20px 30px 50px 30px;
+        .title {
+            margin-bottom: 40px;
+            color: var(--header-text-color);
+        }
+        label {
+            font-size: 16px;
+            color: var(--primary-text-color);
+        }
+        .ui.icon.input {
+            i.icon {
+                font-size: 20px;
+                color: green;
+            }
+        }
+        .error-message {
+            font-size: 14px;
+            color: var(--danger);
+        }
+        .password-container {
+            position: relative;
+            i.icon {
+                position: absolute;
+                font-size: 20px;
+                color: var(--primary-text-color);
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .password {
+                padding-right: 50px;
+            }
+        }
+        .login-link {
+            text-decoration: underline;
+            color: var(--primary-text-color);
+            text-align: end;
+        }
+        .btn {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .other-options {
+            margin: 20px 0;
+            gap: 10px;
+            &::before, &::after {
+                content: "";
+                flex: 1;
+                height: 1px;
+                background-color: #aaa;
+            }
+        }
+        .socials {
+            justify-content: center;
+            gap: 20px;
+            i.icon {
+                font-size: 30px;
+                line-height: 30px;
+            }
+            .google {
+                color: #E24134;
+            }
+            .facebook {
+                color: blue;
+            }
+            .ui.segment {
+                margin: 0 !important;
+                gap: 6px;
+                flex: 1;
+            }
+            span {
+                font-weight: 600;
+                color: var(--primary-text-color);
+            }
+        }
+    }
+
+    .join-img {
+        flex: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .register-container {
+        justify-content: center;
+        .ui.form {
+            border: none;
+            padding: 0;
+            box-shadow: none;
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    .register-container {
+        justify-content: center;
+        .join-img {
+            display: none;
+        }
+    }
+}

@@ -43,4 +43,9 @@ export class AuthService {
   signInWithFacebook() {
     return this.angularFireAuth.signInWithPopup(new FacebookAuthProvider);
   }
+
+  // CHECK IF USER IS LOGGED IN
+  isLoggedIn() {
+    return typeof localStorage.getItem("isLoggedIn") == "string";
+  }
 }
