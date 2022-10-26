@@ -2,18 +2,33 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { SuiModalModule } from '@richardlt/ng2-semantic-ui';
+import { LoadingModalComponent } from './components/loading-modal/loading-modal.component';
+import { SuccessModalComponent } from './components/success-modal/success-modal.component';
+import { FailureModalComponent } from './components/failure-modal/failure-modal.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    LoadingModalComponent,
+    SuccessModalComponent,
+    FailureModalComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    ToastrModule.forRoot(),
+    SuiModalModule
   ],
   exports: [
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SuiModalModule,
+    LoadingModalComponent,
+    SuccessModalComponent,
+    FailureModalComponent
   ]
 })
 export class SharedModule { }

@@ -2,138 +2,128 @@
     <form class="ui raised segment form" [formGroup]="form" (ngSubmit)="register()">
         <h1 class="title">Register</h1>
         
-        <!-- USERNAME -->
+        <!-- NAME -->
         <div
             class="field"
-            [ngClass]="{error: form.get('username')!.touched && form.get('username')!.errors}"
+            [ngClass]="{error: form.get('name')!.touched && form.get('name')!.errors}"
         >
-            <label for="">Username</label>
-            <div class="ui icon input">
+            <label for="">Name</label>
                 <input
                     type="text"
-                    placeholder="Enter Username"
-                    formControlName="username"
-                    (input)="usernameInput()"
+                    placeholder="Enter name"
+                    formControlName="name"
                 >
-                <i class="check circle" [class.icon]="usernameAvailabilityChecked && !usernameExists"></i>
-            </div>
 
-            <ng-container *ngIf="form.get('username')!.valid">
-                <p class="error-message" *ngIf="usernameCheckFailed">
-                    Check failed, try again
-                </p>
-                <p class="error-message" *ngIf="!usernameCheckFailed && usernameAvailabilityChecked && usernameExists">
-                    Username already in use
-                </p>
-            </ng-container>
-
-            <small class="error-message" *ngIf="form.get('username')!.touched && form.get('username')!.errors">
-                <ng-container *ngIf="form.get('username')!.errors!['required']; else invalidUsername">
-                     Enter username
+            <small class="error-message" *ngIf="form.get('name')!.touched && form.get('name')!.errors">
+                <ng-container *ngIf="form.get('name')!.errors!['required']; else invalidName">
+                        Enter name
                 </ng-container>
-                <ng-template #invalidUsername>
-                     Enter a valid username
+                <ng-template #invalidName>
+                        Only aplhabets allowed
                 </ng-template>
             </small>
         </div>
-        <!-- CHECK USERNAME BUTTON -->
-        <div *ngIf="!usernameAvailabilityChecked || usernameExists else restOfForm">
-            <button
-                type="button"
-                class="ui yellow button btn"
-                [class.loading]="checkingUsernameAvailability"
-                [disabled]="form.get('username')!.invalid || checkingUsernameAvailability"
-                (click)="checkUsername()"
-            >
-                Check Availability
-            </button>
-            <p style="margin-top: 10px;" class="clickable login-link" routerLink="/login">Already have an account?</p>
+
+        <!-- EMAIL -->
+        <div
+            class="field"
+            [ngClass]="{error: form.get('email')!.touched && form.get('email')!.errors}"
+        >
+            <label for="">Email</label>
+            <input type="email" placeholder="Enter Email Address" formControlName="email">
+            <small class="error-message" *ngIf="form.get('email')!.touched && form.get('email')!.errors">
+                <ng-container *ngIf="form.get('email')!.errors!['required']; else invalidEmail">
+                        Enter email
+                </ng-container>
+                <ng-template #invalidEmail>
+                        Enter a valid email address
+                </ng-template>
+            </small>
+            <small class="error-message" *ngIf="emailAlreadyInUse">
+                Email already in use
+            </small>
         </div>
 
-        <ng-template #restOfForm>
-            <!-- EMAIL -->
-            <div
-                class="field"
-                [ngClass]="{error: form.get('email')!.touched && form.get('email')!.errors}"
-            >
-                <label for="">Email</label>
-                <input type="email" placeholder="Enter Email Address" formControlName="email">
-                <small class="error-message" *ngIf="form.get('email')!.touched && form.get('email')!.errors">
-                    <ng-container *ngIf="form.get('email')!.errors!['required']; else invalidEmail">
-                         Enter email
-                    </ng-container>
-                    <ng-template #invalidEmail>
-                         Enter a valid email address
-                    </ng-template>
-                </small>
+        <!-- PASSWORD -->
+        <div
+            class="field"
+            [ngClass]="{error: form.get('password')!.touched && form.get('password')!.errors}"
+        >
+            <label for="">Password</label>
+            <div class="password-container">
+                <input
+                    [type]="passwordVisible ? 'text' : 'password'"
+                    placeholder="Enter Password"
+                    class="password"
+                    name="password"
+                    formControlName="password"
+                    #password>
+                <i
+                    class="clickable eye icon"
+                    [ngClass]="{slash: passwordVisible}"
+                    (click)="togglePasswordVisibility(password)"
+                ></i>
             </div>
-    
-            <!-- PASSWORD -->
-            <div
-                class="field"
-                [ngClass]="{error: form.get('password')!.touched && form.get('password')!.errors}"
-            >
-                <label for="">Password</label>
-                <div class="password-container">
-                    <input
-                        [type]="passwordVisible ? 'text' : 'password'"
-                        placeholder="Enter Password"
-                        class="password"
-                        name="password"
-                        formControlName="password"
-                        #password>
-                    <i
-                        class="clickable eye icon"
-                        [ngClass]="{slash: passwordVisible}"
-                        (click)="togglePasswordVisibility(password)"
-                    ></i>
-                </div>
-                <small class="error-message" *ngIf="form.get('password')!.touched && form.get('password')!.errors">
-                    <ng-container *ngIf="form.get('password')!.errors!['required']; else invalidPassword">
-                         Enter password
-                    </ng-container>
-                    <ng-template #invalidPassword>
-                         Password must contain at least 6 characters
-                    </ng-template>
-                </small>
+            <small class="error-message" *ngIf="form.get('password')!.touched && form.get('password')!.errors">
+                <ng-container *ngIf="form.get('password')!.errors!['required']; else invalidPassword">
+                        Enter password
+                </ng-container>
+                <ng-template #invalidPassword>
+                        Password must contain at least 6 characters
+                </ng-template>
+            </small>
+        </div>
+
+        <!-- CONFIRM PASSWORD -->
+        <div
+            class="field"
+            [ngClass]="{error: form.get('confirmPassword')!.touched && form.get('confirmPassword')!.errors}"
+        >
+            <label for="">Confirm Password</label>
+            <div class="password-container">
+                <input
+                    [type]="confirmPasswordVisible ? 'text' : 'password'"
+                    placeholder="Re-enter Password"
+                    class="password"
+                    name="confirmPassword"
+                    formControlName="confirmPassword"
+                    [pattern]="password.value"
+                    #confirmPassword>
+                <i
+                    class="clickable eye icon"
+                    [ngClass]="{slash: confirmPasswordVisible}"
+                    (click)="togglePasswordVisibility(confirmPassword)"
+                ></i>
             </div>
-    
-            <!-- CONFIRM PASSWORD -->
-            <div
-                class="field"
-                [ngClass]="{error: form.get('confirmPassword')!.touched && form.get('confirmPassword')!.errors}"
-            >
-                <label for="">Confirm Password</label>
-                <div class="password-container">
-                    <input
-                        [type]="confirmPasswordVisible ? 'text' : 'password'"
-                        placeholder="Re-enter Password"
-                        class="password"
-                        name="confirmPassword"
-                        formControlName="confirmPassword"
-                        [pattern]="password.value"
-                        #confirmPassword>
-                    <i
-                        class="clickable eye icon"
-                        [ngClass]="{slash: confirmPasswordVisible}"
-                        (click)="togglePasswordVisibility(confirmPassword)"
-                    ></i>
-                </div>
-                <small class="error-message" *ngIf="form.get('confirmPassword')!.touched && form.get('confirmPassword')!.errors">
-                    <ng-container *ngIf="form.get('confirmPassword')!.errors!['required']; else notSamePassword">
-                         Re-enter password
-                    </ng-container>
-                    <ng-template #notSamePassword>
-                         Password do not match
-                    </ng-template>
-                </small>
-            </div>
-            <p class="clickable login-link" routerLink="/login">Already have an account?</p>
-    
-            <!-- REGISTER BUTTON -->
-            <button type="submit" class="ui yellow button btn" [disabled]="form.invalid">Register</button>
-    
-        </ng-template>
+            <small class="error-message" *ngIf="form.get('confirmPassword')!.touched && form.get('confirmPassword')!.errors">
+                <ng-container *ngIf="form.get('confirmPassword')!.errors!['required']; else notSamePassword">
+                        Re-enter password
+                </ng-container>
+                <ng-template #notSamePassword>
+                        Password do not match
+                </ng-template>
+            </small>
+        </div>
+        <p class="clickable login-link" routerLink="/login">Already have an account?</p>
+
+        <!-- REGISTER BUTTON -->
+        <button
+            type="submit"
+            class="ui yellow button btn"
+            [class.loading]="!failedToCreateUser && (creatingUserRecord || creatingUser)"
+            [disabled]="form.invalid"
+        >
+            Register
+        </button>
+        <ng-container *ngIf="!emailAlreadyInUse && (failedToCreateUser || failedToCreateUserRecord)">
+            <p *ngIf="failedToCreateUser else recordCreationFailed">
+                Failed to create user
+            </p>
+            <ng-template #recordCreationFailed>
+                Failed to create user record
+            </ng-template>
+        </ng-container>
+            
         <!-- OTHER REGISTRATION OPTIONS -->
         <div class="flex justify-center align-center other-options">
             <p>Or continue with</p>

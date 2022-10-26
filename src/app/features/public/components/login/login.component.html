@@ -1,28 +1,36 @@
 <div class="flex justify-between align-center login-container">
-    <form class="ui raised segment form" [formGroup]="form">
+    <form class="ui raised segment form" [formGroup]="form" (ngSubmit)="login()">
         <h1 class="title">Login</h1>
 
         <!-- EMAIL -->
         <div
             class="field"
-            [ngClass]="{error: form.get('email')!.touched && form.get('email')!.errors}"
+            [ngClass]="{error: userNotFound || (form.get('email')!.touched && form.get('email')!.errors)}"
         >
             <label for="">Email</label>
-            <input type="email" placeholder="Enter Email Address" formControlName="email">
-            <small class="error-message" *ngIf="form.get('email')!.touched && form.get('email')!.errors">
-                <ng-container *ngIf="form.get('email')!.errors!['required']; else invalidEmail">
+            <input
+                type="email"
+                placeholder="Enter Email Address"
+                formControlName="email"
+                (input)="onFormInput()"
+            >
+            <small class="error-message" *ngIf="form.get('email')?.touched && form.get('email')?.errors">
+                <ng-container *ngIf="form.get('email')?.errors!['required']; else invalidEmail">
                      Enter email
                 </ng-container>
                 <ng-template #invalidEmail>
                      Enter a valid email address
                 </ng-template>
             </small>
+            <small class="error-message" *ngIf="form.get('email')?.valid && userNotFound">
+                User does not exist
+            </small>
         </div>
 
         <!-- PASSWORD -->
         <div
             class="field"
-            [ngClass]="{error: form.get('password')!.touched && form.get('password')!.errors}"
+            [ngClass]="{error: passwordIncorrect || (form.get('password')!.touched && form.get('password')!.errors)}"
         >
             <label for="">Password</label>
             <div class="password-container">
@@ -32,6 +40,7 @@
                     class="password"
                     name="password"
                     formControlName="password"
+                    (input)="onFormInput()"
                     #password>
                 <i
                     class="clickable eye icon"
@@ -47,12 +56,24 @@
                      Password must contain at least 6 characters
                 </ng-template>
             </small>
+            <small class="error-message" *ngIf="form.get('password')?.valid && passwordIncorrect">
+                Password incorrect
+            </small>
         </div>
         <div class="flex align-center justify-between forgot-section">
             <p class="clickable"routerLink="/forgot-password">Forgot password?</p>
             <p class="clickable" routerLink="/register">Register</p>
         </div>
-        <button class="ui yellow button btn">Login</button>
+        <button
+            type="submit"
+            class="ui yellow button btn"
+            [class.loading]="loggingIn || sendingVerificationEmail"
+            [disabled]="this.form.invalid || passwordIncorrect || userNotFound"
+        >
+            Login
+        </button>
+
+
         <div class="flex justify-center align-center other-options">
             <p>Or continue with</p>
         </div>

@@ -9,14 +9,12 @@ export class UserService {
 
   constructor(private angularFirestore: AngularFirestore) { }
 
-  createUser(payload: {
-    username: string,
-    email: string,
-    totalNumberOfGamesCompleted: number,
-    bestScore: number
-  }) {
-    return this.angularFirestore.collection("/users").doc(payload.username).set({
-      email: payload.email
+  createUser(payload: {email: string, name: string}) {
+    return this.angularFirestore.collection("/users").doc(payload.email).set({
+      bestScore: 0,
+      email: payload.email,
+      name: payload.name,
+      totalNumberOfGamesCompleted: 0
     })
   }
 

@@ -34,6 +34,11 @@ export class AuthService {
     return user.sendEmailVerification();
   }
 
+  // GET CURRENT USER
+  getCurrentUser() {
+    return this.angularFireAuth.currentUser;
+  }
+
   // SIGN IN WITH GOOGLE
   signInWithGoogle() {
     return this.angularFireAuth.signInWithPopup(new GoogleAuthProvider);
