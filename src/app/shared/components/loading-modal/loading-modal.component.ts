@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {SuiModalService, TemplateModalConfig, ModalTemplate, ModalSize} from '@richardlt/ng2-semantic-ui';
 
 
@@ -14,12 +14,18 @@ interface IContext {
 })
 export class LoadingModalComponent implements OnInit {
 
+  @ViewChild("close") closeBtn!: ElementRef;
+
   @ViewChild('modalTemplate')
   public modalTemplate!: ModalTemplate<IContext, string, string>
 
   constructor(public modalService: SuiModalService) { }
 
   ngOnInit(): void {
+  }
+
+  close() {
+    this.closeBtn.nativeElement.click();
   }
 
   public open(data: IContext) {

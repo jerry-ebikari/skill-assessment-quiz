@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -10,6 +10,8 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class EmailVerificationComponent implements OnInit {
   email!: string | null;
+  @ViewChild("loadingModal") loadingModal: any;
+  @ViewChild("successModal") successModal: any;
 
   constructor(private router: Router, private authService: AuthService, private userService: UserService) { }
 
@@ -23,7 +25,25 @@ export class EmailVerificationComponent implements OnInit {
   }
 
   resendVerificationEmail() {
-    this.userService.getUser(this.email as string)
+    this.successModal.open({
+      title: 'Verification Email Sent',
+      message: 'Follow the link in your email to verify your account'
+    });
+    // this.loadingModal.open({
+    //   title: 'Sending Verification Email',
+    //   message: 'Please wait...'
+    // });
+    // this.authService.getCurrentUser()
+    // .then(res => {
+    //   res?.sendEmailVerification()
+    //   .then(() => {
+    //     this.loadingModal.close();
+    //     this.successModal.open({
+    //       title: 'Verification Email Sent',
+    //       message: 'Follow the link in your email to verify your account'
+    //     });
+    //   })
+    // })
   }
 
 }

@@ -1,14 +1,12 @@
 <app-loading-modal #loadingModal></app-loading-modal>
+<app-success-modal #successModal></app-success-modal>
 <div class="email-verify-container">
     <h1>Activation Email Sent to {{email}}</h1>
     <p>Follow the link in the email to activate your account.
         Can't find email, check spam folder or click
         <span
             class="clickable resend-link"
-            (click)="loadingModal.open({
-                title: 'Sending verification email',
-                message: 'Please wait...'
-            })"
+            (click)="resendVerificationEmail()"
         >here</span>
         to resend.
     </p>

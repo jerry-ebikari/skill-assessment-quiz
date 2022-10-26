@@ -1,0 +1,16 @@
+#close {
+    display: none;
+}
+
+.check.circle {
+    font-size: 40px;
+    color: var(--success);
+}
+
+.ui.segment {
+    border: none;
+    box-shadow: none;
+    .title, .message {
+        text-align: center;
+    }
+}

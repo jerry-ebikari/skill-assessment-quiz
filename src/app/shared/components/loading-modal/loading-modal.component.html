@@ -1,7 +1,8 @@
 <ng-template let-context let-modal="modal" #modalTemplate>
     <div class="ui segment">
-        <h3>{{context.title}}</h3>
-        <p>{{context.message}}</p>
         <div class="ui loading segment"></div>
+        <h3 class="title">{{context.title}}</h3>
+        <p class="message">{{context.message}}</p>
+        <button id="close" #close (click)="modal.approve()"></button>
     </div>
 </ng-template>
