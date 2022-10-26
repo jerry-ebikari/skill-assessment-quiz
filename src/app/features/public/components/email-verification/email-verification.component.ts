@@ -12,6 +12,7 @@ export class EmailVerificationComponent implements OnInit {
   email!: string | null;
   @ViewChild("loadingModal") loadingModal: any;
   @ViewChild("successModal") successModal: any;
+  @ViewChild("failureModal") failureModal: any;
 
   constructor(private router: Router, private authService: AuthService, private userService: UserService) { }
 
@@ -20,30 +21,30 @@ export class EmailVerificationComponent implements OnInit {
     if (!this.email) {
       this.router.navigate(["/login"]);
     }
-    console.log(this.userService.getUser(this.email as string));
-    
   }
 
   resendVerificationEmail() {
-    this.successModal.open({
-      title: 'Verification Email Sent',
-      message: 'Follow the link in your email to verify your account'
+    this.loadingModal.open({
+      title: 'Sending Verification Email',
+      message: 'Please wait...'
     });
-    // this.loadingModal.open({
-    //   title: 'Sending Verification Email',
-    //   message: 'Please wait...'
-    // });
-    // this.authService.getCurrentUser()
-    // .then(res => {
-    //   res?.sendEmailVerification()
-    //   .then(() => {
-    //     this.loadingModal.close();
-    //     this.successModal.open({
-    //       title: 'Verification Email Sent',
-    //       message: 'Follow the link in your email to verify your account'
-    //     });
-    //   })
-    // })
+    this.authService.getCurrentUser()
+    .then(res => {
+      res?.sendEmailVerification()
+      .then(() => {
+        this.loadingModal.close();
+        this.successModal.open({
+          title: 'Verification Email Sent',
+          message: 'Follow the link in your email to verify your account'
+        });
+      }, () => {
+        this.loadingModal.close();
+        this.failureModal.open({
+          title: 'Failed to Send Email',
+          message: 'Please try again'
+        });
+      })
+    })
   }
 
 }

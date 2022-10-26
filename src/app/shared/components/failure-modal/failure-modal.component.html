@@ -1,1 +1,10 @@
-<p>failure-modal works!</p>
+<ng-template let-context let-modal="modal" #modalTemplate>
+    <div class="ui segment">
+        <div class="flex justify-center">
+            <i class="close icon"></i>
+        </div>
+        <h3 class="title">{{context.title}}</h3>
+        <p class="message">{{context.message}}</p>
+        <button id="close" #close (click)="modal.approve()"></button>
+    </div>
+</ng-template>
