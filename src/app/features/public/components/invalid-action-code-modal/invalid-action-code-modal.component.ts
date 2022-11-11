@@ -8,14 +8,13 @@ interface IContext {
 }
 
 @Component({
-  selector: 'app-failure-modal',
-  templateUrl: './failure-modal.component.html',
-  styleUrls: ['./failure-modal.component.scss']
+  selector: 'app-invalid-action-code-modal',
+  templateUrl: './invalid-action-code-modal.component.html',
+  styleUrls: ['./invalid-action-code-modal.component.scss']
 })
-export class FailureModalComponent implements OnInit {
+export class InvalidActionCodeModalComponent implements OnInit {
 
   @ViewChild("close") closeBtn!: ElementRef;
-  @Output() modalClosed = new EventEmitter<boolean>();
 
   @ViewChild('modalTemplate')
   public modalTemplate!: ModalTemplate<IContext, string, string>
@@ -27,7 +26,6 @@ export class FailureModalComponent implements OnInit {
 
   close() {
     this.closeBtn.nativeElement.click();
-    this.modalClosed.emit(true);
   }
 
   public open(data: IContext) {
@@ -41,10 +39,8 @@ export class FailureModalComponent implements OnInit {
     this.modalService
         .open(config)
         .onApprove((result: any) => {
-          this.modalClosed.emit(true);
         })
         .onDeny(result => {
-          this.modalClosed.emit(true);
         });
 }
 

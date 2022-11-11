@@ -7,6 +7,7 @@ import { SuiModalModule } from '@richardlt/ng2-semantic-ui';
 import { LoadingModalComponent } from './components/loading-modal/loading-modal.component';
 import { SuccessModalComponent } from './components/success-modal/success-modal.component';
 import { FailureModalComponent } from './components/failure-modal/failure-modal.component';
+import { DeleteModalComponent } from './components/delete-modal/delete-modal.component';
 
 
 
@@ -14,7 +15,8 @@ import { FailureModalComponent } from './components/failure-modal/failure-modal.
   declarations: [
     LoadingModalComponent,
     SuccessModalComponent,
-    FailureModalComponent
+    FailureModalComponent,
+    DeleteModalComponent
   ],
   imports: [
     CommonModule,

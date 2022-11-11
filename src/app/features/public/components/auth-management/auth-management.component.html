@@ -1,0 +1,76 @@
+<app-invalid-action-code-modal #invalidActionCodeModal></app-invalid-action-code-modal>
+<div class="flex justify-between align-center auth-management-container">
+    <form class="ui raised segment form" [formGroup]="passwordResetForm" *ngIf="mode == 'resetPassword'">
+        <h1 class="title">Reset Password</h1>
+
+        
+        <!-- PASSWORD -->
+        <div
+            class="field"
+            [ngClass]="{error: passwordResetForm.get('password')!.touched && passwordResetForm.get('password')!.errors}"
+        >
+            <label for="">New Password</label>
+            <div class="password-container">
+                <input
+                    [type]="passwordVisible ? 'text' : 'password'"
+                    placeholder="Enter New Password"
+                    class="password"
+                    name="password"
+                    formControlName="password"
+                    #password>
+                <i
+                    class="clickable eye icon"
+                    [ngClass]="{slash: passwordVisible}"
+                    (click)="togglePasswordVisibility(password)"
+                ></i>
+            </div>
+            <small class="error-message" *ngIf="passwordResetForm.get('password')!.touched && passwordResetForm.get('password')!.errors">
+                <ng-container *ngIf="passwordResetForm.get('password')!.errors!['required']; else invalidPassword">
+                        Enter password
+                </ng-container>
+                <ng-template #invalidPassword>
+                        Password must contain at least 6 characters
+                </ng-template>
+            </small>
+        </div>
+
+        <!-- CONFIRM PASSWORD -->
+        <div
+            class="field"
+            [ngClass]="{error: passwordResetForm.get('confirmPassword')!.touched && passwordResetForm.get('confirmPassword')!.errors}"
+        >
+            <label for="">Confirm Password</label>
+            <div class="password-container">
+                <input
+                    [type]="confirmPasswordVisible ? 'text' : 'password'"
+                    placeholder="Re-enter Password"
+                    class="password"
+                    name="confirmPassword"
+                    formControlName="confirmPassword"
+                    [pattern]="password.value"
+                    #confirmPassword>
+                <i
+                    class="clickable eye icon"
+                    [ngClass]="{slash: confirmPasswordVisible}"
+                    (click)="togglePasswordVisibility(confirmPassword)"
+                ></i>
+            </div>
+            <small class="error-message" *ngIf="passwordResetForm.get('confirmPassword')!.touched && passwordResetForm.get('confirmPassword')!.errors">
+                <ng-container *ngIf="passwordResetForm.get('confirmPassword')!.errors!['required']; else notSamePassword">
+                        Re-enter password
+                </ng-container>
+                <ng-template #notSamePassword>
+                        Password do not match
+                </ng-template>
+            </small>
+        </div>
+
+        <button
+            type="submit"
+            class="ui yellow button btn"
+        >
+            Submit
+        </button>
+    </form>
+    <img class="join-img" src="assets/images/landing-page-background.svg" alt="">
+</div>

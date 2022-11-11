@@ -3,5 +3,7 @@
     padding-bottom: 60px;
     .resend-link {
         text-decoration: underline;
+        color: var(--header-text-color);
+        font-weight: 700;
     }
 }

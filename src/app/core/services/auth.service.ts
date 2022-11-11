@@ -9,6 +9,21 @@ export class AuthService {
 
   constructor(private angularFireAuth: AngularFireAuth) { }
 
+  // Get angular fire auth
+  getAngularFireAuth() {
+    return this.angularFireAuth
+  }
+
+  // SEND PASSWORD RESET EMAIL
+  sendPasswordResetEmail(email: string) {
+    return this.angularFireAuth.sendPasswordResetEmail(email)
+  }
+
+  // VERIFY PASSWORD RESET CODE
+  verifyPasswordResetCode(code: string) {
+    return this.angularFireAuth.verifyPasswordResetCode(code)
+  }
+
   // EMAIL AND PASSWORD LOGIN
   emailLogin(email: string, password: string) {
     return this.angularFireAuth.signInWithEmailAndPassword(email, password);

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { deleteUser } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
@@ -22,7 +21,7 @@ export class UserService {
     return this.angularFirestore.doc("users/" + id).update(data);
   }
 
-  getUser(id: string) {
+  getUserRecord(id: string) {
     return this.angularFirestore.doc("users/" + id)
   }
 

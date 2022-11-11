@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import {SuiModalService, TemplateModalConfig, ModalTemplate, ModalSize} from '@richardlt/ng2-semantic-ui';
 
 
@@ -15,6 +15,7 @@ interface IContext {
 export class SuccessModalComponent implements OnInit {
 
   @ViewChild("close") closeBtn!: ElementRef;
+  @Output() modalClosed = new EventEmitter<boolean>();
 
   @ViewChild('modalTemplate')
   public modalTemplate!: ModalTemplate<IContext, string, string>
@@ -26,6 +27,7 @@ export class SuccessModalComponent implements OnInit {
 
   close() {
     this.closeBtn.nativeElement.click();
+    this.modalClosed.emit(true);
   }
 
   public open(data: IContext) {
@@ -39,9 +41,11 @@ export class SuccessModalComponent implements OnInit {
     this.modalService
         .open(config)
         .onApprove((result: any) => {
-          
+          this.modalClosed.emit(true);
         })
-        .onDeny(result => { /* deny callback */});
+        .onDeny(result => {
+          this.modalClosed.emit(true);
+        });
 }
 
 }

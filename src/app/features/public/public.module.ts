@@ -8,6 +8,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
+import { AuthManagementComponent } from './components/auth-management/auth-management.component';
+import { InvalidActionCodeModalComponent } from './components/invalid-action-code-modal/invalid-action-code-modal.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { EmailVerificationComponent } from './components/email-verification/emai
     RegisterComponent,
     LandingPageComponent,
     ForgotPasswordComponent,
-    EmailVerificationComponent
+    EmailVerificationComponent,
+    AuthManagementComponent,
+    InvalidActionCodeModalComponent
   ],
   imports: [
     CommonModule,

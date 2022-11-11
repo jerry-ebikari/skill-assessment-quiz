@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthManagementComponent } from './components/auth-management/auth-management.component';
 import { DemoComponent } from './components/demo/demo.component';
 import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: "forgot-password", component: ForgotPasswordComponent},
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
-  {path: "email-verification", component: EmailVerificationComponent}
+  {path: "email-verification", component: EmailVerificationComponent},
+  {path: "authmgmt", component: AuthManagementComponent},
 ];
 
 @NgModule({
