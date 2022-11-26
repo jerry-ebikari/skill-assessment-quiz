@@ -24,6 +24,11 @@ export class AuthService {
     return this.angularFireAuth.verifyPasswordResetCode(code)
   }
 
+  // CONFIRM PASSWORD RESET
+  confirmPasswordReset(actionCode: string, newPassword: string) {
+    return this.angularFireAuth.confirmPasswordReset(actionCode, newPassword)
+  }
+
   // EMAIL AND PASSWORD LOGIN
   emailLogin(email: string, password: string) {
     return this.angularFireAuth.signInWithEmailAndPassword(email, password);
@@ -33,6 +38,17 @@ export class AuthService {
   register(email: string, password: string) {
     return this.angularFireAuth.createUserWithEmailAndPassword(email, password);
   }
+
+  // SEND VERIFICATION EMAIL
+  sendVerificationEmail(user: any) {
+    return user.sendEmailVerification();
+  }
+
+  // VERIFY USER EMAIL
+  verifyUserEmail(actionCode: string) {
+    return this.angularFireAuth.applyActionCode(actionCode)
+  }
+
 
   // LOGOUT
   logout() {
@@ -44,10 +60,7 @@ export class AuthService {
     return this.angularFireAuth.sendPasswordResetEmail(email);
   }
 
-  // SEND VERIFICATION EMAIL
-  sendVerificationEmail(user: any) {
-    return user.sendEmailVerification();
-  }
+
 
   // GET CURRENT USER
   getCurrentUser() {

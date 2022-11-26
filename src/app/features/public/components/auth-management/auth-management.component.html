@@ -1,6 +1,10 @@
-<app-invalid-action-code-modal #invalidActionCodeModal></app-invalid-action-code-modal>
 <div class="flex justify-between align-center auth-management-container">
-    <form class="ui raised segment form" [formGroup]="passwordResetForm" *ngIf="mode == 'resetPassword'">
+    <form
+        class="ui raised segment form"
+        [ngClass]="{loading: !actionCodeVerified}"
+        [formGroup]="passwordResetForm"
+        *ngIf="mode == 'resetPassword'"
+    >
         <h1 class="title">Reset Password</h1>
 
         
@@ -68,6 +72,9 @@
         <button
             type="submit"
             class="ui yellow button btn"
+            [ngClass]="{loading: resettingPassword}"
+            [disabled]="passwordResetForm.invalid || resettingPassword"
+            (click)="confirmPasswordReset()"
         >
             Submit
         </button>

@@ -12,6 +12,14 @@
     .buttons {
         column-gap: 20px;
     }
+    .navlinks {
+        gap: 20px;
+    }
+    .navlink {
+        font-size: 20px;
+        cursor: pointer;
+        color: var(--primary-text);
+    }
 }
 
 @media (max-width: 768px) {

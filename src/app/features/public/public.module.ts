@@ -9,7 +9,8 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
 import { AuthManagementComponent } from './components/auth-management/auth-management.component';
-import { InvalidActionCodeModalComponent } from './components/invalid-action-code-modal/invalid-action-code-modal.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
+import { TopicsComponent } from './components/topics/topics.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { InvalidActionCodeModalComponent } from './components/invalid-action-cod
     ForgotPasswordComponent,
     EmailVerificationComponent,
     AuthManagementComponent,
-    InvalidActionCodeModalComponent
+    FavoritesComponent,
+    TopicsComponent,
   ],
   imports: [
     CommonModule,

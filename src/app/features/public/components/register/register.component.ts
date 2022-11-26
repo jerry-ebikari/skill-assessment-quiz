@@ -81,9 +81,7 @@ export class RegisterComponent implements OnInit {
           }
         } else {
           this.failedToCreateUserRecord = true;
-          this.router.navigate(['/email-verification'], {
-            queryParams: {email: this.form.get("email")?.value}
-          })
+          this.router.navigate(['/email-verification'])
         }
         this.creatingUser = false;
         this.creatingUserRecord = false;

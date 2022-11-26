@@ -8,6 +8,11 @@
             <button routerLink="/login" class="ui yellow basic button btn">Login</button>
             <button routerLink="/register" class="ui primary basic button btn">Sign up</button>
         </div>
+        <nav class="flex navlinks" *ngIf="isLoggedIn">
+            <a class="navlink" routerLink="/user">Home</a>
+            <a class="navlink" routerLink="/user/topics">Topics</a>
+            <a class="navlink" routerLink="/user/favorites">Favorites</a>
+        </nav>
         <button
             *ngIf="isLoggedIn"
             class="ui red basic button btn"
