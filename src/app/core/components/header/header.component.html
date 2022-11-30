@@ -1,17 +1,21 @@
 <header class="flex justify-between header">
     <img class="clickable" routerLink="/" src="assets/images/logo.svg" alt="">
+    <!-- <button *ngIf="!isLoggedIn" routerLink="/login" class="ui yellow basic button btn login-btn">Login</button> -->
     <div class="flex align-center links">
-        <!-- <p class="clickable link" *ngFor="let link of navlinks">
-            {{link.title}}
-        </p> -->
         <div class="flex buttons" *ngIf="!isLoggedIn">
             <button routerLink="/login" class="ui yellow basic button btn">Login</button>
             <button routerLink="/register" class="ui primary basic button btn">Sign up</button>
         </div>
         <nav class="flex navlinks" *ngIf="isLoggedIn">
-            <a class="navlink" routerLink="/user">Home</a>
-            <a class="navlink" routerLink="/user/topics">Topics</a>
-            <a class="navlink" routerLink="/user/favorites">Favorites</a>
+            <a
+                *ngFor="let navlink of navlinks"
+                class="navlink"
+                [routerLink]="navlink.routerLink"
+                routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{exact: navlink.exact ? true : false}"
+            >
+                {{navlink.displayText}}
+            </a>
         </nav>
         <button
             *ngIf="isLoggedIn"

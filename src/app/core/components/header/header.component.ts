@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from "src/app/core/services/auth.service";
+import { Navlink } from '../../models/navlink';
+import { NavlinksService } from '../../services/navlinks.service';
 
 @Component({
   selector: 'app-header',
@@ -10,19 +12,11 @@ import { AuthService } from "src/app/core/services/auth.service";
 export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
   loggingOut: boolean = false;
-  // @Input() navlinks: any = [
-  //   {
-  //     title: "Demo"
-  //   },
-  //   {
-  //     title: "About"
-  //   },
-  //   {
-  //     title: "Contact"
-  //   },
-  // ]
+  navlinks: Navlink[] = this.navlinkService.navlinks;
   constructor(
-    private authService: AuthService, private router: Router
+    private authService: AuthService,
+    private router: Router,
+    private navlinkService: NavlinksService
   ) { }
 
   ngOnInit(): void {

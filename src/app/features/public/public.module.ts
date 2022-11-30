@@ -9,8 +9,6 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
 import { AuthManagementComponent } from './components/auth-management/auth-management.component';
-import { FavoritesComponent } from './components/favorites/favorites.component';
-import { TopicsComponent } from './components/topics/topics.component';
 
 
 @NgModule({
@@ -21,8 +19,6 @@ import { TopicsComponent } from './components/topics/topics.component';
     ForgotPasswordComponent,
     EmailVerificationComponent,
     AuthManagementComponent,
-    FavoritesComponent,
-    TopicsComponent,
   ],
   imports: [
     CommonModule,

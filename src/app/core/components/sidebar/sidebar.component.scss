@@ -1,0 +1,48 @@
+::ng-deep .sidebar-sibling {
+    min-height: 100%;
+}
+
+::ng-deep .sidebar-container {
+    border: none !important;
+}
+
+.menu-btn {
+    position: fixed;
+    top: 30px;
+    right: 20px;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .menu-btn {
+        display: none;
+    }
+}
+
+.drawer {
+    padding-top: 70px;
+}
+
+.drawer-content {
+    height: 100%;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item {
+    font-weight: 700;
+}
+
+.active-link {
+    border-left: 5px solid var(--primary-color-dark);
+    background-color: var(--primary-color-light) !important;
+    color: #fff !important;
+}
+
+.logout-btn {
+    width: 80%;
+    align-self: center;
+}

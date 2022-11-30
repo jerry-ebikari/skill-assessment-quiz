@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FavoritesComponent } from '../public/components/favorites/favorites.component';
-import { TopicsComponent } from '../public/components/topics/topics.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
+import { TopicsComponent } from './components/topics/topics.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
