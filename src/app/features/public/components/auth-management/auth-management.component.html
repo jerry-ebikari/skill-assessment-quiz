@@ -1,4 +1,4 @@
-<div class="flex justify-between align-center auth-management-container">
+<div class="ui vertical segment flex justify-between align-center auth-management-container" [ngClass]="{loading: loading}">
     <form
         class="ui raised segment form"
         [ngClass]="{loading: !actionCodeVerified}"
@@ -74,7 +74,7 @@
             class="ui yellow button btn"
             [ngClass]="{loading: resettingPassword}"
             [disabled]="passwordResetForm.invalid || resettingPassword"
-            (click)="confirmPasswordReset()"
+            (click)="resetPassword()"
         >
             Submit
         </button>

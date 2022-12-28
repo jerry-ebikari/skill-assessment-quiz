@@ -25,4 +25,8 @@ export class UserService {
   updateUser(userId: string, data: any) {
     return this.usersRef?.doc(userId).update(data);
   }
+
+  saveUserEmailLocally(email: string) {
+    localStorage.setItem("userEmail", email);
+  }
 }

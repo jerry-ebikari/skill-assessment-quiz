@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { UserService } from 'src/app/features/user/services/user.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
@@ -22,7 +23,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private toastService: ToastService,
-    private router: Router) { }
+    private router: Router,
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -49,45 +52,58 @@ export class LoginComponent implements OnInit {
     if (this.form.valid && !this.userNotFound && !this.passwordIncorrect) {
       this.loggingIn = true;
       this.authService.emailLogin(this.form.get("email")?.value, this.form.get("password")?.value)
-      .then((res) => {
-        localStorage.setItem("userEmail", this.form.get("email")?.value);
-        if (res.user?.emailVerified) {
-          localStorage.setItem("isLoggedIn", "true");
-          this.router.navigate(['/user']);
-        } else {
-          let user = res.user;
-          this.sendingVerificationEmail = true;
-          this.toastService.showInfo("Email is not verified", "Sending verification email...");
-          this.authService.getCurrentUser().then((res) => {
-            res?.sendEmailVerification()
-            .then((res: any) => {
-              localStorage.setItem("user", JSON.stringify(user))
-              this.toastService.showSuccess("Verification email sent");
-              setTimeout(() => {
-                this.router.navigate(["/email-verification"]);
-                this.sendingVerificationEmail = false;
-              }, 2000)
-              
-            }, (err: any) => {
-              this.sendingVerificationEmail = false;
-              this.toastService.showError("Failed to send email", "Try logging in again");
+      .then(
+        (res) => {
+          console.log(res);
+          localStorage.setItem("userEmail", this.form.get("email")?.value);
+          // IF USER EMAIL IS VERIFIED
+          if (res.user?.emailVerified) {
+            this.loggingIn = false;
+            localStorage.setItem("isLoggedIn", "true");
+            this.router.navigate(['/user']);
+          }
+
+          // IF USER EMAIL IS NOT VERIFIED
+          else {
+            let user = res.user;
+            this.sendingVerificationEmail = true;
+            this.toastService.showInfo("Email is not verified", "Sending verification email...");
+            this.authService.getCurrentUser().then((res) => {
+              res?.sendEmailVerification()
+              .then(
+                (res: any) => {
+                  localStorage.setItem("user", JSON.stringify(user))
+                  this.toastService.showSuccess("Verification email sent");
+                  setTimeout(() => {
+                    this.loggingIn = false;
+                    this.router.navigate(["/email-verification"]);
+                    this.sendingVerificationEmail = false;
+                  }, 2000)
+                },
+                (err: any) => {
+                  this.loggingIn = false;
+                  this.sendingVerificationEmail = false;
+                  this.toastService.showError("Failed to send email", "Try logging in again");
+                }
+              )
             })
-          })
+          }
+        },
+      
+        (err) => {
+          console.log(err.message);
+          if (err.message.includes("no user")) {
+            this.userNotFound = true;
+          }
+          else if (err.message.includes("password")) {
+            this.passwordIncorrect = true;
+          }
+          else {
+            this.toastService.showError("Login failed", "Check your internet connection");
+          }
+          this.loggingIn = false;
         }
-        this.loggingIn = false;
-      }, (err) => {
-        console.log(err.message);
-        if (err.message.includes("no user")) {
-          this.userNotFound = true;
-        }
-        else if (err.message.includes("password")) {
-          this.passwordIncorrect = true;
-        }
-        else {
-          this.toastService.showError("Login failed", "Check your internet connection");
-        }
-        this.loggingIn = false;
-      })
+      )
     }
   }
 

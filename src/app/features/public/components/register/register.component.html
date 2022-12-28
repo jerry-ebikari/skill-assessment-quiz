@@ -1,25 +1,20 @@
 <div class="flex justify-between align-center register-container">
     <form class="ui raised segment form" [formGroup]="form" (ngSubmit)="register()">
         <h1 class="title">Register</h1>
-        
+
         <!-- NAME -->
         <div
             class="field"
             [ngClass]="{error: form.get('name')!.touched && form.get('name')!.errors}"
         >
-            <label for="">Name</label>
-                <input
-                    type="text"
-                    placeholder="Enter name"
-                    formControlName="name"
-                >
-
+            <label for="">Name </label>
+            <input type="text" placeholder="Enter Name" formControlName="name">
             <small class="error-message" *ngIf="form.get('name')!.touched && form.get('name')!.errors">
                 <ng-container *ngIf="form.get('name')!.errors!['required']; else invalidName">
-                        Enter name
+                        Enter Name
                 </ng-container>
                 <ng-template #invalidName>
-                        Only aplhabets allowed
+                        Only Alphabets Allowed
                 </ng-template>
             </small>
         </div>
@@ -110,19 +105,14 @@
         <button
             type="submit"
             class="ui yellow button btn"
-            [class.loading]="!failedToCreateUser && (creatingUserRecord || creatingUser)"
+            [class.loading]="!failedToCreateUser && creatingUser"
             [disabled]="form.invalid"
         >
             Register
         </button>
-        <ng-container *ngIf="!emailAlreadyInUse && (failedToCreateUser || failedToCreateUserRecord)">
-            <p *ngIf="failedToCreateUser else recordCreationFailed">
-                Failed to create user
-            </p>
-            <ng-template #recordCreationFailed>
-                Failed to create user record
-            </ng-template>
-        </ng-container>
+        <p *ngIf="!emailAlreadyInUse && failedToCreateUser">
+            Failed to create user
+        </p>
             
         <!-- OTHER REGISTRATION OPTIONS -->
         <div class="flex justify-center align-center other-options">
@@ -136,13 +126,13 @@
                 <i class="google icon"></i>
                 <span>Google</span>
             </div>
-            <div
+            <!-- <div
                 class="ui clickable flex align-center justify-center segment facebook"
                 (click)="loginWithFacebook()"
             >
                 <i class="facebook icon"></i>
                 <span>Facebook</span>
-            </div>
+            </div> -->
         </div>
     </form>
 
