@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-email-verification',
@@ -14,7 +13,7 @@ export class EmailVerificationComponent implements OnInit {
   @ViewChild("successModal") successModal: any;
   @ViewChild("failureModal") failureModal: any;
 
-  constructor(private router: Router, private authService: AuthService, private userService: UserService) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.email = localStorage.getItem("userEmail");

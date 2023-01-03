@@ -9,6 +9,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
 import { AuthManagementComponent } from './components/auth-management/auth-management.component';
+import { AddNameModalComponent } from './modals/add-name-modal/add-name-modal.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { AuthManagementComponent } from './components/auth-management/auth-manag
     ForgotPasswordComponent,
     EmailVerificationComponent,
     AuthManagementComponent,
+    AddNameModalComponent,
   ],
   imports: [
     CommonModule,

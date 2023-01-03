@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { UserService } from 'src/app/features/user/services/user.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
@@ -78,7 +77,6 @@ export class AuthManagementComponent implements OnInit {
     this.authService.verifyUserEmail(actionCode)
     .then((res: any) => {
       console.log(res);
-      // this.userService.saveUserEmailLocally(res.email)
       this.toastService.showSuccess("Email verified", "Redirecting to login page...");
       setTimeout(() => {
         this.loading = false;
