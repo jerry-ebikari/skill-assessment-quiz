@@ -6,7 +6,9 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 export class UserService {
 
-  constructor(private angularFirestore: AngularFirestore) { }
+  constructor(
+    private angularFirestore: AngularFirestore
+  ) { }
 
   createUser(payload: {email: string, name: string}) {
     return this.angularFirestore.collection("/users").doc(payload.email).set({
@@ -31,5 +33,17 @@ export class UserService {
 
   deleteUser(id: string) {
     return this.angularFirestore.doc("user/" + id).delete();
+  }
+
+  updateUserProfile(user: any, data: {displayName: string}): Promise<void> {
+    return user?.updateProfile(data)
+  }
+
+  saveUserToLocalStorage(user: any) {
+    localStorage.setItem("user", JSON.stringify(user));
+  }
+
+  retrieveUserFromLocalStorage() {
+    return JSON.parse(localStorage.getItem("user") || '');
   }
 }

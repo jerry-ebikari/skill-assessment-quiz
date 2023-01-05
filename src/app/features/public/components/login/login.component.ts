@@ -61,6 +61,8 @@ export class LoginComponent implements OnInit {
             this.loggingIn = false;
             localStorage.setItem("isLoggedIn", "true");
             this.router.navigate(['/user']);
+            this.userService.saveUserToLocalStorage(res.user);
+            res.user.updateProfile({})
           }
 
           // IF USER EMAIL IS NOT VERIFIED
