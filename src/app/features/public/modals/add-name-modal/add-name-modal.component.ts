@@ -12,9 +12,7 @@ export class AddNameModalComponent implements OnInit {
 
   constructor(private modal: SuiModal<{user: any}>) { }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void { }
 
 }
 
