@@ -60,8 +60,10 @@ export class AuthManagementComponent implements OnInit {
       (res) => {
         console.log(res);
         this.actionCodeVerified = true;
+        this.loading = false;
       },
       (err) => {
+        this.loading = false;
         console.log(err);
         this.toastService.showError("Link invalid or expired");
         setTimeout(() => {
