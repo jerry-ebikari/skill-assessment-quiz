@@ -62,7 +62,6 @@ export class LoginComponent implements OnInit {
             localStorage.setItem("isLoggedIn", "true");
             this.router.navigate(['/user']);
             this.userService.saveUserToLocalStorage(res.user);
-            res.user.updateProfile({})
           }
 
           // IF USER EMAIL IS NOT VERIFIED
@@ -113,6 +112,13 @@ export class LoginComponent implements OnInit {
     this.authService.signInWithGoogle()
     .then((res) => {
       console.log(res);
+      let userInfo = res.additionalUserInfo?.profile
+      // USER INFO - email, family_name, given_name, name, picture
+      console.log(userInfo);
+      localStorage.setItem("user", JSON.stringify(userInfo))
+      localStorage.setItem("isLoggedIn", "true");
+      this.router.navigate(['/user']);
+      this.userService.saveUserToLocalStorage(res.user);
     }, (err) => {
       console.log(err);
     })

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { UserService } from 'src/app/shared/services/user.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
@@ -20,7 +21,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -49,6 +51,9 @@ export class RegisterComponent implements OnInit {
       // USER INFO - email, family_name, given_name, name, picture
       console.log(userInfo);
       localStorage.setItem("user", JSON.stringify(userInfo))
+      localStorage.setItem("isLoggedIn", "true");
+      this.router.navigate(['/user']);
+      this.userService.saveUserToLocalStorage(res.user);
     }, (err) => {
       console.log(err);
     })
