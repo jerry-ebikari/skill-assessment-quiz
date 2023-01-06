@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
         new AddNameModal()
       )
     }
+    console.log(this.user);
   }
 
 }

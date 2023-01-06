@@ -1,14 +1,20 @@
-<!-- <button class="ui tiny basic  button "> -->
 <i
     *ngIf="isLoggedIn"
     class="large yellow icon menu-btn"
     [ngClass]="{bars: !isVisible, close: isVisible}"
     (click)="toggle()"
 ></i>
-<!-- </button> -->
 
 <sui-sidebar-container class="ui bottom attached segment" ngClass="sidebar-container">
-    <sui-sidebar class="vertical" #sidebar direction="right" transition="overlay" [(isVisible)]="isVisible" [ngClass]="['drawer']">
+    <!-- SIDEBAR -->
+    <sui-sidebar
+        class="vertical"
+        #sidebar
+        direction="right"
+        transition="overlay"
+        [(isVisible)]="isVisible"
+        [ngClass]="['drawer']"
+    >
         <div class="drawer-content">
             <div class="items">
                 <ng-container *ngIf="isLoggedIn">
@@ -34,8 +40,9 @@
             </button>
         </div>
     </sui-sidebar>
+
+    <!-- SIDEBAR SIBLING -->
     <sui-sidebar-sibling [isDimmedWhenVisible]="true" [ngClass]="'sidebar-sibling'">
-        <!-- <button class="ui button" (click)="sidebar.open()">Open Sidebar</button> -->
         <ng-content></ng-content>
     </sui-sidebar-sibling>
 </sui-sidebar-container>
